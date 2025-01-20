@@ -10,5 +10,4 @@ db.books.find({$nor:[{isbn:/^19/}, {title:/mongo/}, {pageCount:{$gt:600}}]});
 //5
 db.books.countDocuments({pageCount:{$mod:[10,0]}});
 //7
-db.books.find({thumbnailUrl:{$nin:[gfg]}});
-
+db.books.find({$or: [{ thumbnailUrl: { $exists: false } },{ thumbnailUrl: null }]})
