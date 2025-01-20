@@ -7,7 +7,7 @@ db.books.updateOne({status:"PUBLISH",publishedDate:{$exists:false}},{$currentDat
 //4
 db.books.updateMany({price:100},{$set:{price:100}},{upsert:true})
 //5
-db.books.updateOne({categories:{$all:["Java"]}},{$mul:{price:1.1}})
+db.books.update({categories:{$all:["Java"]}},{$mul:{price:1.1}})
 //6
 db.books.updateMany({title:/c#/i},{$inc:{pageCount:-20},$currentDate:{lastModified:true}})
 //7
