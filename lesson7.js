@@ -11,11 +11,11 @@ db.books.update({categories:{$all:["Java"]}},{$mul:{price:1.1}})
 //6
 db.books.updateMany({title:/c#/i},{$inc:{pageCount:-20},$currentDate:{lastModified:true}})
 //7
-db.books.update({},{$max:{pageCount:0},$set:{pageCount:100},$currentDate:{lastModifiedPages:true}})
+db.books.updateMany({},{$max:{pageCount:0},$currentDate:{lastModifiedPages:true}})
 //8
 db.books.update({},{$rename:{lastModifiedPages:lastModified}})
 //9
-db.books.update({},{$min:{pageCount:1000},$set:{pageCount:230}})
+db.books.updateMany({},{$min:{pageCount:1000}})
 //10
 db.books.update({authors:null},{$unset:{authors:true}})
 db.books.update({categories:null},{$unset:{categories:true}})
