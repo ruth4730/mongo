@@ -9,8 +9,7 @@ db.books.distinct('categories').map(c=>{
 //3
 db.books.aggregate([
     {$match:{title:/^A/}},
-    {$set:{title:"$title"}},
-    {$set:{pageCount:'$pageCount'}},
+    {$project:{title:1,pageCount:1}},
     {$sort:{publishedDate:-1}}
 ])
 //4
@@ -22,8 +21,7 @@ db.books.aggregate([
 //5
 db.books.aggregate([
     {$match:{pageCount:{$gt:0}}},
-    {$project:{longDescription:0}},
-    {$project:{shortDescription:0}},
+    {$project:{longDescription:0,shortDescription:0}},
     {$skip:10},
     {$limit:100},
     {$out:'books2'}
@@ -41,14 +39,21 @@ db.books.aggregate([
 ])
 //7
 db.books.aggregate([
-    { $group: {
-        _id: '$status',
-        pageCountAvg:   { $avg: '$pageCount' },
-        pageCountMax:   { $max: '$pageCount' },
-        pageCountMin:   { $min: '$pageCount' },
-        pageCountFirst: { $first: '$pageCount' },
-        pageCountLast:  { $last: '$pageCount' }
-    } }
+    {$group:{
+        _id:"$status",
+        pageCountAVG:{$avg:'$pageCount'},
+        pageCountMAX:{$max:'$pageCount'},
+        pageCountMIN:{$min:'$pageCount'},
+        pageCountFIRST:{$first:'$pageCount'},
+        pageCountLAST:{$last:'$pageCount'},
+    }},
+    {$project:{
+        pageCountAVG:1,
+        pageCountMAX:1,
+        pageCountMIN:1,
+        pageCountFIRST:1,
+        pageCountLAST:1
+    }}   
 ])
 //8
 db.books.aggregate([
