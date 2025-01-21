@@ -1,12 +1,12 @@
-use shoes_storeDB
-show dbs
+//use shoes_storeDB
+//show dbs
 db.createCollection('shoes')
 db.shoes.insert({_id:ObjectId(),short_desc:'very nice shoe',img_url:'https://chat.malkabruk.co.il/',ISBN:'64395840',categories:[sandal,summer],website_id:ObjectId()})
 db.website.insert({_id:ObjectId(),name:'next',url:'https://chat.malkabruk.co.il/',arr_shoes:[]})
-show dbs
+//show dbs
 db.website.drop()
 //תרגול 3
-use catalog_books
+//use catalog_books
 //2
 db.books.find({})
 //3
